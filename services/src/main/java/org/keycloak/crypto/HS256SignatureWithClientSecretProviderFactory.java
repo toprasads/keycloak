@@ -16,21 +16,20 @@
  */
 package org.keycloak.crypto;
 
-public interface Algorithm {
+import org.keycloak.models.KeycloakSession;
 
-    String HS256 = "HS256";
-    String HS256_USING_CLIENT_SECRET = "HS256_USING_CLIENT_SECRET";
-    String HS384 = "HS384";
-    String HS512 = "HS512";
-    String RS256 = "RS256";
-    String RS384 = "RS384";
-    String RS512 = "RS512";
-    String ES256 = "ES256";
-    String ES384 = "ES384";
-    String ES512 = "ES512";
-    String PS256 = "PS256";
-    String PS384 = "PS384";
-    String PS512 = "PS512";
+public class HS256SignatureWithClientSecretProviderFactory implements SignatureProviderFactory {
 
-    String AES = "AES";
+    public static final String ID = Algorithm.HS256_USING_CLIENT_SECRET;
+
+    @Override
+    public String getId() {
+        return ID;
+    }
+
+    @Override
+    public SignatureProvider create(KeycloakSession session) {
+        return new MacUsingClientSecretSignatureProvider(session, Algorithm.HS256_USING_CLIENT_SECRET);
+    }
+
 }
