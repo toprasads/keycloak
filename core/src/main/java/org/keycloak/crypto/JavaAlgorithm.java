@@ -45,6 +45,7 @@ public class JavaAlgorithm {
             case Algorithm.RS512:
                 return RS512;
             case Algorithm.HS256:
+            case Algorithm.HS256_USING_CLIENT_SECRET:
                 return HS256;
             case Algorithm.HS384:
                 return HS384;
@@ -79,6 +80,7 @@ public class JavaAlgorithm {
             case Algorithm.RS512:
                 return SHA512;
             case Algorithm.HS256:
+            case Algorithm.HS256_USING_CLIENT_SECRET:
                 return SHA256;
             case Algorithm.HS384:
                 return SHA384;
