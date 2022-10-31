@@ -128,7 +128,7 @@ public class FileTruststoreProvider implements TruststoreProvider {
         this.rootCertificates = certsLoader.trustedRootCerts;
         this.intermediateCertificates = certsLoader.intermediateCerts;
         TruststoreProviderSingleton.set(this);
-        log.debug("File truststore provider initialized: " + new File(storepath).getAbsolutePath());
+        log.info("File truststore provider initialized: " + new File(storepath).getAbsolutePath());
     }
 
     @Override

@@ -36,9 +36,11 @@ FileTruststoreProviderFactory implements TruststoreProviderFactory {
     private static final Logger log = Logger.getLogger(FileTruststoreProviderFactory.class);
 
     private TruststoreProvider provider;
+    private KeycloakSession session;
 
     @Override
     public TruststoreProvider create(KeycloakSession session) {
+        this.session = session;
         return provider;
     }
 
