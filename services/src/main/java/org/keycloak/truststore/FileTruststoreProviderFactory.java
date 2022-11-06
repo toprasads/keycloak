@@ -30,8 +30,7 @@ import java.util.List;
 /**
  * @author <a href="mailto:mstrukel@redhat.com">Marko Strukelj</a>
  */
-public class
-FileTruststoreProviderFactory implements TruststoreProviderFactory {
+public class FileTruststoreProviderFactory implements TruststoreProviderFactory {
 
     private static final Logger log = Logger.getLogger(FileTruststoreProviderFactory.class);
 
@@ -40,13 +39,19 @@ FileTruststoreProviderFactory implements TruststoreProviderFactory {
 
     @Override
     public TruststoreProvider create(KeycloakSession session) {
+        log.info("create called; returning provider");
+        if(provider == null) {
+            log.info("but provider is null");
+        }
         this.session = session;
         return provider;
     }
 
     @Override
     public void init(Config.Scope config) {
-        FileTruststoreProvider fileTruststoreProvider = new FileTruststoreProvider(config);
+        log.info("newly modified truststore provider");
+        provider = new FileTruststoreProvider(config);
+        TruststoreProviderSingleton.set(provider);
     }
 
 

@@ -17,18 +17,26 @@
 
 package org.keycloak.truststore;
 
+import org.jboss.logging.Logger;
+
 /**
  * @author <a href="mailto:mstrukel@redhat.com">Marko Strukelj</a>
  */
 class TruststoreProviderSingleton {
 
+    private static final Logger log = Logger.getLogger(TruststoreProviderSingleton.class);
     static private TruststoreProvider provider;
 
     static void set(TruststoreProvider tp) {
+        log.info("setting provider ref in singleton");
         provider = tp;
     }
 
     static TruststoreProvider get() {
+        if(provider instanceof FileTruststoreProvider){
+            log.info("provider instanceof FileTruststoreProvider; call getRootCerts so that truststore is loaded again");
+            provider.getRootCertificates();
+        }
         return provider;
     }
 }

@@ -19,6 +19,7 @@ package org.keycloak.truststore;
 
 import org.apache.http.conn.ssl.BrowserCompatHostnameVerifier;
 import org.apache.http.conn.ssl.StrictHostnameVerifier;
+import org.jboss.logging.Logger;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 
@@ -33,6 +34,8 @@ import javax.net.ssl.TrustManagerFactory;
  */
 public class JSSETruststoreConfigurator {
 
+    private static final Logger log = Logger.getLogger(JSSETruststoreConfigurator.class);
+
     private TruststoreProvider provider;
     private volatile javax.net.ssl.SSLSocketFactory sslFactory;
     private volatile TrustManager[] tm;
@@ -43,16 +46,24 @@ public class JSSETruststoreConfigurator {
 
         provider = truststoreFactory.create(session);
         if (provider != null && provider.getTruststore() == null) {
+            log.info("setting provider to null");
+            if (provider == null) log.info("provider is null");
+            else if(provider.getTruststore() == null) log.info("provider.trustStore is null");
             provider = null;
         }
     }
 
     public JSSETruststoreConfigurator(TruststoreProvider provider) {
+        log.info("constructor called with provider as parameter");
+        if(provider == null){
+            log.info("provider is null");
+        }
         this.provider = provider;
     }
 
     public javax.net.ssl.SSLSocketFactory getSSLSocketFactory() {
         if (provider == null) {
+            log.info("getSslSocketFactory(): JSSETruststoreConfigurator returning null for provider");
             return null;
         }
 
@@ -74,10 +85,12 @@ public class JSSETruststoreConfigurator {
 
     public TrustManager[] getTrustManagers() {
         if (provider == null) {
+            log.info("getTrustManagers(): returning null for provider");
             return null;
         }
 
         if (tm == null) {
+            log.info("tm is null");
             synchronized (this) {
                 if (tm == null) {
                     TrustManagerFactory tmf = null;

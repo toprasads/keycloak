@@ -61,10 +61,11 @@ public class SSLSocketFactory extends javax.net.ssl.SSLSocketFactory implements 
         sslsf = sf;
     }
 
+
+
     public static synchronized SSLSocketFactory getDefault() {
-        if (instance == null) {
-            instance = new SSLSocketFactory();
-        }
+        log.info("SSLSocketFactory.getDefault() called");
+        instance = new SSLSocketFactory();
         return instance;
     }
 
