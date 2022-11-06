@@ -39,9 +39,9 @@ public class FileTruststoreProviderFactory implements TruststoreProviderFactory 
 
     @Override
     public TruststoreProvider create(KeycloakSession session) {
-        log.info("create called; returning provider");
+        log.trace("create called; returning provider");
         if(provider == null) {
-            log.info("but provider is null");
+            log.trace("but provider is null");
         }
         this.session = session;
         return provider;
@@ -49,7 +49,7 @@ public class FileTruststoreProviderFactory implements TruststoreProviderFactory 
 
     @Override
     public void init(Config.Scope config) {
-        log.info("newly modified truststore provider");
+        log.trace("newly modified truststore provider");
         provider = new FileTruststoreProvider(config);
         TruststoreProviderSingleton.set(provider);
     }

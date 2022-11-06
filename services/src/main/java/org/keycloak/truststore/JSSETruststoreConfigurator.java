@@ -46,24 +46,24 @@ public class JSSETruststoreConfigurator {
 
         provider = truststoreFactory.create(session);
         if (provider != null && provider.getTruststore() == null) {
-            log.info("setting provider to null");
-            if (provider == null) log.info("provider is null");
-            else if(provider.getTruststore() == null) log.info("provider.trustStore is null");
+            log.trace("setting provider to null");
+            if (provider == null) log.trace("provider is null");
+            else if(provider.getTruststore() == null) log.trace("provider.trustStore is null");
             provider = null;
         }
     }
 
     public JSSETruststoreConfigurator(TruststoreProvider provider) {
-        log.info("constructor called with provider as parameter");
+        log.trace("constructor called with provider as parameter");
         if(provider == null){
-            log.info("provider is null");
+            log.trace("provider is null");
         }
         this.provider = provider;
     }
 
     public javax.net.ssl.SSLSocketFactory getSSLSocketFactory() {
         if (provider == null) {
-            log.info("getSslSocketFactory(): JSSETruststoreConfigurator returning null for provider");
+            log.trace("getSslSocketFactory(): JSSETruststoreConfigurator returning null for provider");
             return null;
         }
 
@@ -85,12 +85,12 @@ public class JSSETruststoreConfigurator {
 
     public TrustManager[] getTrustManagers() {
         if (provider == null) {
-            log.info("getTrustManagers(): returning null for provider");
+            log.trace("getTrustManagers(): returning null for provider");
             return null;
         }
 
         if (tm == null) {
-            log.info("tm is null");
+            log.trace("tm is null; creating tm from provider's truststore");
             synchronized (this) {
                 if (tm == null) {
                     TrustManagerFactory tmf = null;

@@ -54,7 +54,7 @@ public class SSLSocketFactory extends javax.net.ssl.SSLSocketFactory implements 
         }
 
         if (sf == null) {
-            log.info("No truststore provider found - using default SSLSocketFactory");
+            log.debug("No truststore provider found - using default SSLSocketFactory");
             sf = (javax.net.ssl.SSLSocketFactory) javax.net.ssl.SSLSocketFactory.getDefault();
         }
 
@@ -64,7 +64,7 @@ public class SSLSocketFactory extends javax.net.ssl.SSLSocketFactory implements 
 
 
     public static synchronized SSLSocketFactory getDefault() {
-        log.info("SSLSocketFactory.getDefault() called");
+        log.debug("SSLSocketFactory.getDefault() called");
         instance = new SSLSocketFactory();
         return instance;
     }

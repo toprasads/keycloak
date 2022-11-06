@@ -28,13 +28,13 @@ class TruststoreProviderSingleton {
     static private TruststoreProvider provider;
 
     static void set(TruststoreProvider tp) {
-        log.info("setting provider ref in singleton");
+        log.trace("setting provider ref in singleton");
         provider = tp;
     }
 
     static TruststoreProvider get() {
         if(provider instanceof FileTruststoreProvider){
-            log.info("provider instanceof FileTruststoreProvider; call getRootCerts so that truststore is loaded again");
+            log.trace("provider instanceof FileTruststoreProvider; call getRootCerts so that truststore is loaded again");
             provider.getRootCertificates();
         }
         return provider;
